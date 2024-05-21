@@ -81,6 +81,7 @@ EXAMPLE_DOC_STRING = """
         >>> import torch
         >>> from diffusers import StableDiffusionXLImg2ImgPipeline, AutoencoderKL
         >>> from diffusers.utils import load_image
+        
         >>> vae = AutoencoderKL.from_pretrained(
         ...     "madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch.float16
         ... )
@@ -88,6 +89,7 @@ EXAMPLE_DOC_STRING = """
         ...     "stabilityai/stable-diffusion-xl-base-1.0", custom_pipeline="jyoung105/sdxl_perturbed_attention_guidance_i2i", vae=vae, torch_dtype=torch.float16
         ... )
         >>> pipe = pipe.to("cuda")
+        
         >>> prompt = "a photo of an astronaut riding a horse on mars"
         >>> init_image = load_image("")
         >>> image = pipe(prompt, image=init_image, strength=0.9, pag_scale=3.0, pag_applied_layers=['mid']).images[0]

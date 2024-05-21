@@ -54,15 +54,18 @@ EXAMPLE_DOC_STRING = """
     Examples:
         ```py
         >>> import torch
-        >>> from diffusers import StableDiffusionXLPipeline
+        >>> from diffusers import StableDiffusionXLPipeline, AutoencoderKL
 
+        >>> vae = AutoencoderKL.from_pretrained(
+        ...     "madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch.float16
+        ... )
         >>> pipe = StableDiffusionXLPipeline.from_pretrained(
-        ...     "stabilityai/stable-diffusion-xl-base-1.0", torch_dtype=torch.float16
+        ...     "stabilityai/stable-diffusion-xl-base-1.0", custom_pipeline="multimodalart/sdxl_perturbed_attention_guidance", vae=vae, torch_dtype=torch.float16
         ... )
         >>> pipe = pipe.to("cuda")
 
         >>> prompt = "a photo of an astronaut riding a horse on mars"
-        >>> image = pipe(prompt).images[0]
+        >>> image = pipe(prompt, pag_scale=3.0, pag_applied_layers=['mid']).images[0]
         ```
 """
 
